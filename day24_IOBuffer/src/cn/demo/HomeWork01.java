@@ -12,6 +12,7 @@ public class HomeWork01 {
 		Iterator<File> it = list.iterator();
 		while(it.hasNext()) {
 			File file1 = it.next();
+			System.out.println(file1);
 			File file2 = new File("F:\\Java\\tese",file1.getName());
 			CopyFile(file1,file2);
 		}
@@ -20,11 +21,11 @@ public class HomeWork01 {
 	public static List<File> chooseFile(File file,List<File> list){
 		File[] arr = file.listFiles(new MyFile());
 		for(File fl:arr) {
-			if(fl.isDirectory()) {
-				chooseFile(fl,list);
-			}else {
+//			if(fl.isDirectory()) {
+//				chooseFile(fl,list);
+//			}else {
 				list.add(fl);
-			}
+//			}
 		}
 		return list;
 	}
