@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<input type="text" name="username" id="username"/>
+		<input type="text" name="password" id="password"/>
+		<input type="submit" value="登陆" onclick="formClick()"/>
+	</div>
+</body>
+<script type="text/javascript">
+	function formClick(){
+		var param = {};
+		param.username = document.getElementById("username").value;
+		param.password = document.getElementById("password").value;
+		console.log(param);
+	    var ajax = new XMLHttpRequest();
+	    ajax.onreadystatechange = function(){
+			if(ajax.readyState==4){
+				if(ajax.status==200){
+					console.log(ajax.responseText);
+					var data = JSON.parse(ajax.responseText);
+				}
+			}
+		}
+		ajax.open("POST","/day50_filter/login");
+		ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		var data ={data:param,method:"post"};
+		ajax.send("data="+JSON.stringify(data));
+		
+	}
+</script>
+</html>

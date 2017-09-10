@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div style="width: 30%;background-color: rgb(240,240,240);">
+	<!-- <form action="/day48_json/getProduct" method="post"> -->
+		Value:<input type="text" name="value" id="myVal">
+		<input type="submit" value="搜索" onclick="myClock()">
+	<!-- </form> -->
+</div>
+<div style="width: 30%;background-color: rgb(240,240,240);">
+	<ul id="myUl">
+		<li>列表</li>
+	</ul>
+</div>
+
+
+</body>
+<script type="text/javascript">
+	function myClock(){
+		var myValue = document.getElementById("myVal").value
+		console.log(myValue);
+		var ajax = new XMLHttpRequest();
+		ajax.onreadystatechange = function(){
+			if(ajax.readyState==4){
+				if(ajax.status==200){
+					console.log(ajax.responseText);
+					var data = JSON.parse(ajax.responseText);
+					for(var i=0;i<data.length;i++){
+						var li = document.createElement("li");
+						li.innerHTML = data[i];
+						document.getElementById("myUl").appendChild(li);
+					}
+				}
+			}
+		}
+		ajax.open("POST","/day48_json/getProduct");
+		ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	 	var ss = {data:myValue}
+		/* console.log(ss); */
+	 	
+		ajax.send(ss);
+	}
+</script>
+</html>
