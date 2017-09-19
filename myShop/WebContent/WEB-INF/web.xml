@@ -94,4 +94,34 @@
     <servlet-name>DeleteCartList</servlet-name>
     <url-pattern>/deleteCartList</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OrderForm</display-name>
+    <servlet-name>OrderForm</servlet-name>
+    <servlet-class>cn.demo.web.servlet.OrderForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderForm</servlet-name>
+    <url-pattern>/orderForm</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetOrderList</display-name>
+    <servlet-name>GetOrderList</servlet-name>
+    <servlet-class>cn.demo.web.servlet.GetOrderList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetOrderList</servlet-name>
+    <url-pattern>/getOrderList</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetOrderItems</display-name>
+    <servlet-name>GetOrderItems</servlet-name>
+    <servlet-class>cn.demo.web.servlet.GetOrderItems</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetOrderItems</servlet-name>
+    <url-pattern>/getOrderItems</url-pattern>
+  </servlet-mapping>
 </web-app>

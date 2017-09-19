@@ -35,6 +35,10 @@ public class CartItem {
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
+	@Override
+	public String toString() {
+		return "CartItem [product=" + product + ", buyNum=" + buyNum + ", subtotal=" + subtotal + "]";
+	}
 	
 	
 	
