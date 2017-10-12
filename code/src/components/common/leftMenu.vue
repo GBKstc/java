@@ -1,0 +1,49 @@
+<template>
+  <div class="leftMenu">
+    <el-menu :default-active="onRoutes" theme="dark" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" router>
+      <el-menu-item index="/Home/Register"><i class="el-icon-menu"></i>预约订餐</el-menu-item>
+      <el-menu-item index="/Home/RepastNum"><i class="el-icon-menu"></i>每日就餐统计</el-menu-item>
+      <el-menu-item index="/Home/BaseTable"><i class="el-icon-message"></i>管理员</el-menu-item>
+      <el-menu-item index="/home/BaseTable1"><i class="el-icon-edit"></i>订餐表报</el-menu-item>
+      <el-menu-item index="/home/RepastNumTable"><i class="el-icon-edit"></i>就餐统计表报</el-menu-item>
+      <!--<el-menu-item index="/home/charts"><i class="el-icon-date"></i>图表</el-menu-item>-->
+      <!--<el-menu-item index="/home/mainActive"><i class="el-icon-minus"></i>主页</el-menu-item>-->
+      <!--<el-menu-item index="6"><i class="el-icon-view"></i>消息提示</el-menu-item>-->
+      <!--<el-menu-item index="2"><i class="el-icon-star-off"></i>评分</el-menu-item>-->
+      <!--<el-menu-item index="7"><i class="el-icon-star-on"></i>通知</el-menu-item>-->
+    </el-menu>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+  export default {
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    },
+    computed: {
+      onRoutes() {
+        return this.$route.path.replace('/', '');
+      }
+    }
+  }
+</script>
+<style lang="scss">
+  .leftMenu {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    top: 60px;
+    width: 190px;
+    left: 0;
+    z-index: 999;
+    ul {
+      height: 100%;
+      border-radius: 0;
+    }
+  }
+</style>
