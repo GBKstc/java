@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="18">
           <el-table :data="tableData" style="width: 100%" v-loading='load'>
-          <el-table-column prop="department.name" label="部门" width="100">
+          <el-table-column prop="department.name" label="部门" width="200">
           </el-table-column>
           <!--<el-table-column prop="date" label="日期" width="200">-->
           <!--</el-table-column>-->
@@ -39,7 +39,6 @@
           </el-form>
         </el-col>
       </el-row>
-
     </div>
 
     <!--<el-dialog title="用户信息" :visible.sync="dialogFormVisible">-->

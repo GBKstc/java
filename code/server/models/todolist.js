@@ -7,19 +7,32 @@ const format = require('date-fns/format');
 const Todolist = TodolistDb.import(todoModel);
 const Dininglist = TodolistDb.import(diningModel);
 const Department = TodolistDb.import(departmentModel);
+Todolist.belongsTo(Department,{foreignKey:'dep_id'});
 Dininglist.belongsTo(Department,{foreignKey:'dep_id'});
 
-const getTodolistById = async function (status) {
+const getTodolistById = async function (status,page,limit) {
+  let Offset = page*limit;
   const todolist = await Todolist.findAll({ // 查找全部的todolist
     where:{
       status:status
     },
     order: "id DESC",
-    limit : 200,
-    attributes: ['id', 'content', 'status','name','number','diningform','date','department','phone','standard'],
+    offset: Offset, //跳过 offset 条
+    limit : 10,//获取 limit 条
+    attributes: ['id', 'content', 'status','name','number','diningform','date','dep_id','phone','standard'],
+    include:{model:Department,attributes:['name']}
   });
-
-  return todolist // 返回数据
+  const Count = await Todolist.findOne({ //获取总数量
+    where:{
+      status:status,
+    },
+    attributes: [[TodolistDb.fn('COUNT', TodolistDb.col('id')), 'count']],
+  });
+  let data = {
+    todolist:todolist,
+    count:Count.count,
+  };
+  return data // 返回数据
 };
 
 const createTodolist = async function (data) {
@@ -30,7 +43,7 @@ const createTodolist = async function (data) {
     diningform:data.diningform,
     date:format(data.date, 'YYYY-MM-DD HH:mm:ss'),
     number:data.number,
-    department:data.department,
+    dep_id:data.dep_id,
     phone:data.phone
   })
   return true
@@ -61,7 +74,7 @@ const updateTodolist = async function (id, status, standard) {
 };
 const getDiningList = async function (data) {
 
-  const diningList = await Dininglist.findAll({ // 查找全部的todolist
+  const diningList = await Dininglist.findAll({ // 查找全部的list
     where:{
       date:format(data.date, 'YYYY-MM-DD')+" 00:00:00"
     },

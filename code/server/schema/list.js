@@ -16,9 +16,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.CHAR(20),
       allowNull: true
     },
-    department: {
-      type: DataTypes.CHAR(20),
-      allowNull: true
+    dep_id: {
+      type: DataTypes.INTEGER(10),
+      allowNull: true,
+      references: {
+        model: 'department',
+        key: 'id'
+      }
     },
     date: {
       type: DataTypes.CHAR(30),

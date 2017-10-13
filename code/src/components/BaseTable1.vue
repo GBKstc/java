@@ -1,28 +1,40 @@
 <template>
   <div class="basetable">
     <div class="tableMain">
-      <el-table :data="tableData" style="width: 100%" v-loading='load'>
-        <el-table-column prop="department" label="部门" width="100">
-        </el-table-column>
-        <el-table-column prop="name" label="姓名" width="100">
-        </el-table-column>
-        <el-table-column prop="date" label="日期" width="200">
-        </el-table-column>
+      <el-row>
+        <el-table :data="tableData" style="width: 100%" v-loading='load'>
+          <el-table-column prop="department.name" label="部门" width="150">
+          </el-table-column>
+          <el-table-column prop="name" label="姓名" width="100">
+          </el-table-column>
+          <el-table-column prop="date" label="日期" width="200">
+          </el-table-column>
 
-        <el-table-column prop="diningform" label="就餐形式" width="100">
-        </el-table-column>
-        <el-table-column prop="standard" label="就餐标准" width="100">
-        </el-table-column>
-        <!--<el-table-column prop="status" label="status" width="100">-->
-        <!--</el-table-column>-->
-        <!--<el-table-column prop="id" label="id" width="100">-->
-        <!--</el-table-column>-->
-        <el-table-column prop="number" label="就餐人数" width="100">
-        </el-table-column>
-        <el-table-column prop="content" label="来客单位或事由" >
-        </el-table-column>
+          <el-table-column prop="diningform" label="就餐形式" width="100">
+          </el-table-column>
+          <el-table-column prop="standard" label="就餐标准" width="100">
+          </el-table-column>
+          <!--<el-table-column prop="status" label="status" width="100">-->
+          <!--</el-table-column>-->
+          <!--<el-table-column prop="id" label="id" width="100">-->
+          <!--</el-table-column>-->
+          <el-table-column prop="number" label="就餐人数" width="100">
+          </el-table-column>
+          <el-table-column prop="content" label="来客单位或事由" >
+          </el-table-column>
+        </el-table>
+      </el-row>
+      <el-row >
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :page-size="10"
+          layout="prev, pager, next, jumper"
+          :total="30">
+        </el-pagination>
+      </el-row>
 
-      </el-table>
+
     </div>
 
     <el-dialog title="用户信息" :visible.sync="dialogFormVisible">
@@ -46,7 +58,8 @@
         form: {},
         value6: '',
         currentPage3: 1,
-        load: false
+        load: false,
+        count:100,
       }
     },
     beforeCreate:function () {
@@ -59,20 +72,13 @@
         console.log(decode)
         this.id = decode.id;
         this.name = decode.name;
-        if(this.name!='admin')return
-        this.$http.get('/api/todolist/1')
-          .then((res) => {
-            if (res.status == 200) {
-              this.tableData = res.data
-              console.log(res.data)
-            } else {
-              this.$message.error('获取列表失败！')
-            }
-          }, (err) => {
-            this.$message.error('获取列表失败！')
-            console.log(err)
-          })
+//        if(this.name!='admin')return
+//        this.getList();
       }
+    },
+    mounted:function () {
+      if(this.name!='admin')return;
+      this.getList();
     },
     methods: {
       handleEdit(index, row){
@@ -112,11 +118,30 @@
           });
         });
       },
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+      getList(page){
+      	let Page = page||1;
+      	Page = Page-1;
+//      	console.log(Page);
+        this.$http.get('/api/todolist/1/'+Page+"/10")
+          .then((res) => {
+            if (res.status == 200) {
+              this.tableData = res.data.todolist;
+              this.count = res.data.count;
+              console.log(res.data)
+            } else {
+              this.$message.error('获取列表失败！')
+            }
+          }, (err) => {
+            this.$message.error('获取列表失败！')
+            console.log(err)
+          })
       },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+      handleSizeChange(val) {
+      	console.log("size"+val)
+      },
+      handleCurrentChange(page) {
+        console.log("Current"+page);
+        this.getList(page);
       }
     },
   }
