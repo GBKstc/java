@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		 <tx:attributes>
+			 <tx:method name="fun" isolation="REPEATABLE_READ" propagation="REQUIRED"/>
+		 </tx:attributes>
+ 	</tx:advice>
+ 	
+ 	<!-- 配置织入 -->
+ 	<aop:config>
+ 		<aop:pointcut expression="execution(void cn.demo.dao.DemoDaoImp.fun())" id="txPc"/>
+ 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPc"/>
+ 	</aop:config>
+ 	<!-- <tx:annotation-driven/> -->
+ 	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:db.properties"></property>
+	</bean>
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		 <property name="driverClassName" value="${jdbc.driverClass}"/>
+		 <property name="url" value="${jdbc.url}"/>
+		 <property name="username" value="${jdbc.username}"/>
+		 <property name="password" value="${jdbc.password}"/>
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		 <property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean name="user" class="cn.demo.bean.User"></bean>
+	
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+ 		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+	
+	<bean name="demo" class="cn.demo.Demo">
+		<property name="transactionTemplate" ref="transactionTemplate"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="demoDao" ref="demoDao"/>
+	</bean>
+	
+	<bean name="demoDao" class="cn.demo.dao.DemoDaoImp">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+</beans>

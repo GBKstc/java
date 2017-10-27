@@ -7,6 +7,7 @@ import BaseTabel1 from '../components/BaseTable1.vue'
 import Register from '../components/Register.vue'
 import RepastNum from '../components/RepastNum.vue'
 import RepastNumTable from '../components/RepastNumTable.vue'
+import UserTable from '../components/UserTable.vue'
 
 Vue.use(Router);
 export default new Router({
@@ -24,20 +25,21 @@ export default new Router({
           children:[{
             path:'/Home/Register'
           }]
-        },{
+        }, {
           path:'/Home/RepastNum',
           component:RepastNum
-        },{
+        }, {
         path:'/Home/BaseTable',
           component:BaseTabel
-        },
-        {
+        }, {
           path:'/Home/BaseTable1',
           component:BaseTabel1
-        },
-        {
+        }, {
           path:'/Home/RepastNumTable',
           component:RepastNumTable
+        }, {
+          path:'/Home/UserTable',
+          component:UserTable
         }
 
       ]

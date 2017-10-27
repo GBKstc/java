@@ -12,12 +12,12 @@
           <el-option label="计划财务科" value="7"></el-option>
           <el-option label="劳动人事科" value="8"></el-option>
           <el-option label="职工教育科" value="9"></el-option>
-          <el-option label="驻段验收室" value="驻段验收室"></el-option>
-          <el-option label="材料科" value="材料科"></el-option>
-          <el-option label="武装保卫科" value="武装保卫科"></el-option>
-          <el-option label="经营开发部" value="经营开发部"></el-option>
-          <el-option label="杭州设备车间" value="杭州设备车间"></el-option>
-          <el-option label="乔司检修车间" value="乔司检修车间"></el-option>
+          <el-option label="驻段验收室" value="10"></el-option>
+          <el-option label="材料科" value="11"></el-option>
+          <el-option label="武装保卫科" value="12"></el-option>
+          <el-option label="经营开发部" value="13"></el-option>
+          <el-option label="杭州设备车间" value="14"></el-option>
+          <el-option label="乔司检修车间" value="15"></el-option>
           <el-option label="其他" value="999"></el-option>
         </el-select>
       </el-form-item>
@@ -117,7 +117,6 @@
                   type: 'success',
                   message: '创建成功！'
                 })
-
                 this.resetForm(form);
               } else {
                 this.$message.error('创建失败！')

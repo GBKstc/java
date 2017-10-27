@@ -46,7 +46,7 @@
           @current-change="handleCurrentChange"
           :page-size="10"
           layout="prev, pager, next, jumper"
-          :total="30">
+          :total="count">
         </el-pagination>
       </el-row>
     </div>
@@ -73,7 +73,7 @@
         currentPage3: 1,
         load: false,
         standard:[],//就餐标准
-        count:100,
+        count:1,
       }
     },
     beforeCreate:function () {
@@ -90,13 +90,13 @@
       }
     },
     mounted:function () {
-      if(this.name!='admin')return false;
+//      if(this.name!='admin')return false;
      this.getList();
     },
     methods: {
       handleEdit(index, row){
-      	console.log(index,row);
-      	console.log(this.standard);
+//      	console.log(index,row);
+//      	console.log(this.standard);
         this.$http.put('/api/todolist/'+row.id+'/1',{standard:this.standard[index]})
           .then((res)=>{
           if(res.status==200){
@@ -149,7 +149,7 @@
           .then((res) => {
           if (res.status == 200) {
             this.tableData = res.data.todolist;
-            this.count = res.data.count;
+            this.count = res.data.count.count;
 //              console.log(res.data)
           } else {
             this.$message.error('获取列表失败！')

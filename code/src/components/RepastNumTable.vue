@@ -79,7 +79,7 @@
       };
     },
     mounted:function () {
-        if(this.name!='admin')return;
+//        if(this.name!='admin')return;
         this.getList();
     },
     methods: {

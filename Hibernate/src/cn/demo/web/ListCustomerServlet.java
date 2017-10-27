@@ -3,10 +3,14 @@ package cn.demo.web;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.demo.domain.Customer;
 import cn.demo.ser.CustomerSer;
@@ -17,7 +21,7 @@ import cn.demo.ser.CustomerSerImpl;
  */
 public class ListCustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CustomerSer customerSer = new CustomerSerImpl();
+	private CustomerSer customerSer;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,6 +34,9 @@ public class ListCustomerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext sc = this.getServletContext();
+		WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(sc);
+		customerSer = (CustomerSer) wac.getBean("customerServer");
 		// TODO Auto-generated method stub
 		String cust_name = request.getParameter("cust_name");
 		List<Customer> listCustomerSer  = null;

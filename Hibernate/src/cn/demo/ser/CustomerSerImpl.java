@@ -14,7 +14,11 @@ import cn.demo.utils.HibernateUtil;
 
 public class CustomerSerImpl implements CustomerSer {
 
-	private customerDao customerDao = new customerDaoImpl();
+	private customerDao customerDao;
+
+	public void setCustomerDao(customerDao customerDao) {
+		this.customerDao = customerDao;
+	}
 
 	@Override
 	public void save(Customer c) {

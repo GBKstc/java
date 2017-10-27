@@ -6,7 +6,7 @@
         <a >杭州北车辆段订餐系统</a>
       </div>
       <el-submenu index="3">
-        <template slot="title">{{username}}用户设置</template>
+        <template slot="title">用户设置({{username}})</template>
         <el-menu-item index="2-1" @click="signOut">退出登录</el-menu-item>
       </el-submenu>
       <!--<div></div>-->
@@ -17,19 +17,35 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import jwt from 'jsonwebtoken'
   export default{
     data(){
       return {
         activeIndex: '1',
-        username: window.localStorage.getItem('username')
+        username: jwt.verify(sessionStorage.getItem('demo-token'), 'vue-koa-demo').name
       }
+    },
+    beforeCreate:function () {
+//      const token = sessionStorage.getItem('demo-token');
+//      if(token == null || token == 'null'){
+//        return null
+//
+//      }else {
+//        let decode = jwt.verify(token, 'vue-koa-demo');
+//        console.log(decode);
+//        this.id = decode.id;
+//        this.name = decode.name;
+//        this.jurisdiction = decode.jurisdiction;
+////        this.show = decode.jurisdiction==0?false : true;
+//      }
     },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
       signOut(){
-        this.$router.push({path: '/'})
+        sessionStorage.setItem('demo-token',null); // 将token清空
+        this.$router.push({path: '/'});
       }
 
     }

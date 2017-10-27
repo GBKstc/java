@@ -12,6 +12,14 @@ const getUserById = async function (id) { // 注意是async function 而不是fu
   })
 
   return userInfo // 返回数据
+};
+
+const getUserInfoList = async function () {
+  //const userList = await User.findAll();
+  const userList = await User.findAll({
+    offset: 1, //跳过 offset 条
+  });
+  return userList // 返回数据
 }
 
 const getUserByName = async function (name) {
@@ -22,9 +30,30 @@ const getUserByName = async function (name) {
   })
 
   return userInfo
-}
+};
+
+const createUser = async function (data) {
+  await User.create({
+    user_name: data.user_name,
+    password: data.password,
+    jurisdiction: data.jurisdiction,
+  });
+  return true
+};
+
+const removeUser = async function (id) {
+  await User.destroy({
+    where: {
+      id
+    }
+  });
+  return true
+};
 
 export default {
   getUserById, // 导出getUserById的方法，将会在controller里调用
-  getUserByName
+  getUserByName,
+  getUserInfoList,
+  createUser,
+  removeUser
 }

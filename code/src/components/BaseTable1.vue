@@ -30,7 +30,7 @@
           @current-change="handleCurrentChange"
           :page-size="10"
           layout="prev, pager, next, jumper"
-          :total="30">
+          :total="count">
         </el-pagination>
       </el-row>
 
@@ -59,7 +59,7 @@
         value6: '',
         currentPage3: 1,
         load: false,
-        count:100,
+        count:1,
       }
     },
     beforeCreate:function () {
@@ -77,7 +77,7 @@
       }
     },
     mounted:function () {
-      if(this.name!='admin')return;
+//      if(this.name!='admin')return;
       this.getList();
     },
     methods: {
@@ -126,7 +126,7 @@
           .then((res) => {
             if (res.status == 200) {
               this.tableData = res.data.todolist;
-              this.count = res.data.count;
+              this.count = res.data.count.count;
               console.log(res.data)
             } else {
               this.$message.error('获取列表失败！')
