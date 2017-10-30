@@ -33,6 +33,16 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		return pg;
 	}
+
+	
+
+	@Override
+	public void saveCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		System.out.println(customer);
+		System.out.println(customer.getCust_level());
+		cd.save(customer);
+	}
 	
 
 }

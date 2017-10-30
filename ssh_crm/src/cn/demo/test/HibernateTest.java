@@ -1,5 +1,7 @@
 package cn.demo.test;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.hibernate.Session;
@@ -19,8 +21,11 @@ import cn.demo.dao.CustomerDao;
 import cn.demo.dao.CustomerDaoImpl;
 import cn.demo.dao.UserDao;
 import cn.demo.dao.UserDaoImpl;
+import cn.demo.domain.BaseDict;
 import cn.demo.domain.Customer;
 import cn.demo.domain.User;
+import cn.demo.service.BaseDictService;
+import cn.demo.service.CustomerService;
 import cn.demo.service.UserService;
 import cn.demo.utils.PageBean;
 
@@ -34,8 +39,10 @@ public class HibernateTest {
 	private UserDao ud;
 		@Resource(name="userService")
 	private UserService us;
-		@Resource(name="customerDao")
-	private CustomerDao cd ;
+		@Resource(name="customerService")
+	private CustomerService cs ;
+		@Resource(name="baseDictService")
+	private BaseDictService bds ;
 	public void fun() {
 		
 		Configuration conf = new Configuration().configure();
@@ -73,7 +80,7 @@ public class HibernateTest {
 		session.close();
 		
 	}
-	
+
 	public void fun3() {
 		
 		Session session = sf.openSession();
@@ -88,7 +95,7 @@ public class HibernateTest {
 	
 		
 	}
-
+	
 	public void fun4() {
 		
 		User u1 = new User();
@@ -100,13 +107,31 @@ public class HibernateTest {
 		
 	}
 	
+//	public void fun5() {
+//		DetachedCriteria dc = DetachedCriteria.forClass(Customer.class);
+//		dc.add(Restrictions.like("cust_name", "%"+"%"));
+//		System.out.println(cs.getTotalCount(dc));
+//		PageBean pb = new PageBean(10, null, null);
+//		pb.getStart();
+//	}
+
+	public void fun6() {
+		DetachedCriteria dc = DetachedCriteria.forClass(BaseDict.class);
+		dc.add(Restrictions.eq("dict_type_code", "001"));
+		List<BaseDict> list = bds.getBaseDictList(dc);
+		System.out.println(list);
+	}
 	@Test
-	public void fun5() {
-		DetachedCriteria dc = DetachedCriteria.forClass(Customer.class);
-		dc.add(Restrictions.like("cust_name", "%"+"%"));
-		System.out.println(cd.getTotalCount(dc));
-		PageBean pb = new PageBean(10, null, null);
-		pb.getStart();
+	public void fun7() {
+			
+		Customer cu = new Customer();
+		cu.setCust_name("喜娃");
+//		BaseDict bd = new BaseDict();
+//		bd.setDict_id("22");
+//		cu.setCust_level(bd);
+		cs.saveCustomer(cu);
+		
+		
 	}
 
 

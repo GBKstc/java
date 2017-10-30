@@ -11,4 +11,7 @@ public interface CustomerService {
 
 	PageBean getPageBean(DetachedCriteria dc, Integer pageSize, Integer page);
 
+
+	void saveCustomer(Customer customer);
+
 }

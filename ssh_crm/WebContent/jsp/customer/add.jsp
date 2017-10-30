@@ -14,10 +14,10 @@
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
+
 	<FORM id=form1 name=form1
 		action="${pageContext.request.contextPath }/CustomerAction_add"
 		method=post>
-		
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
@@ -52,26 +52,27 @@
 							<TR>
 								<td>客户名称：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+																
+													
+								<INPUT class="textbox" id=sChannel2
 														style="WIDTH: 180px" maxLength=50 name="cust_name">
 								</td>
-								<td>客户级别 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_level">
+								<td >客户级别 ：</td>
+								<td class="select" selectName="cust_level" baseType="006">
+									
 								</td>
 							</TR>
 							
 							<TR>
 								
 								<td>信息来源 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_source">
+								<td class="select" selectName="cust_source" baseType="002">
+					<!-- 			<INPUT class="textbox" id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="cust_source"> -->
 								</td>
 								<td>联系人：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class="textbox" id=sChannel2
 														style="WIDTH: 180px" maxLength=50 name="cust_linkman">
 								</td>
 							</TR>
@@ -81,12 +82,12 @@
 								
 								<td>固定电话 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class="textbox" id=sChannel2
 														style="WIDTH: 180px" maxLength=50 name="cust_phone">
 								</td>
 								<td>移动电话 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
+								<INPUT class="textbox" id=sChannel2
 														style="WIDTH: 180px" maxLength=50 name="cust_mobile">
 								</td>
 							</TR>
@@ -120,4 +121,51 @@
 		</TABLE>
 	</FORM>
 </BODY>
+<script type="text/javascript" src="../../js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+	(function(){
+		var customer_add = {
+			init:function(){
+				var that = this;
+				that.getSelect();
+			},
+			getSelect(){
+				var that = this;
+				var list = $(".select");
+				for(var i=0;i<list.length;i++){
+					var tb = list.eq(i);
+					var baseType = tb.attr("baseType");
+					var selectName = tb.attr("selectName");
+					if(baseType!=null&&selectName!=null){
+						data={baseType:baseType};
+						that.selectAjax(data,tb,selectName);
+						
+					}
+				}
+				
+			},
+			selectAjax(data,tb,selectName){
+				$.ajax({ url: "/ssh_crm/BaseDictAction", data:data, 
+					success: function(rs){
+						/* <select class=textbox style="HEIGHT:19px;WIDTH: 180px" maxLength=50 name="cust_level">
+						<option value="3" <c:if test="${pageBean.pageSize==3 }">selected</c:if>>3</option>
+						<option value="5" <c:if test="${pageBean.pageSize==5 }">selected</c:if>>5</option>
+					</select> */
+						var select = $('<select class=textbox style="HEIGHT:19px;WIDTH: 180px" maxLength=50 name="'+selectName+'.dict_id"></select>')
+						var value = "";
+			        	for(var j=0;j<rs.length;j++){
+			        		value = value+'<option value="'+rs[j].dict_id+'">'+rs[j].dict_item_name+'</option>';
+			        	}
+			        	select.html(value);
+			        	select.selectedIndex = 1;
+			        	tb.empty();
+			        	tb.append(select);
+			        	console.log(tb.attr("selectName"));
+			      }});
+			}
+		}
+		customer_add.init();
+	})();
+	
+</script>
 </HTML>

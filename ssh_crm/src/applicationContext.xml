@@ -69,6 +69,10 @@
 		<property name="customerService" ref="customerService" ></property>
 	</bean>
 	
+	<bean name="baseDictAction" class="cn.demo.web.action.BaseDictAction" scope="prototype">
+		<property name="baseDictService" ref="baseDictService" ></property>
+	</bean>
+	
 	<!-- Ser配置 -->
 	<bean name="userService" class="cn.demo.service.UserServiceImpl">
 		<property name="ud" ref="userDao"></property>
@@ -78,6 +82,9 @@
 		<property name="cd" ref="customerDao"></property>
 	</bean>
 	
+	<bean name="baseDictService" class="cn.demo.service.BaseDictServiceImpl">
+		<property name="bd" ref="baseDictDao"></property>
+	</bean>
 	
 	<!-- Dao配置 -->
 	<bean name="userDao" class="cn.demo.dao.UserDaoImpl">
@@ -85,6 +92,10 @@
 	</bean>
 	
 	<bean name="customerDao" class="cn.demo.dao.CustomerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean name="baseDictDao" class="cn.demo.dao.BaseDictDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 </beans>

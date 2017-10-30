@@ -26,8 +26,7 @@
 <BODY>
 	<FORM id="customerForm" name="customerForm"
 		action="${pageContext.request.contextPath}/CustomerAction_list"
-		method=post>
-		
+		method=post>		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
 				<TR>
@@ -94,8 +93,8 @@
 												<TR 		
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
 													<TD>${customer.cust_name }</TD>
-													<TD>${customer.cust_level }</TD>
-													<TD>${customer.cust_source }</TD>
+													<TD>${customer.cust_level.dict_item_name }</TD>
+													<TD>${customer.cust_source.dict_item_name }</TD>
 													<TD>${customer.cust_linkman }</TD>
 													<TD>${customer.cust_phone }</TD>
 													<TD>${customer.cust_mobile }</TD>
@@ -121,13 +120,13 @@
 												,每页显示
 												<select name="pageSize">
 												
-												<option value="3" <c:if test="${pageSize==3 }">selected</c:if>>3</option>
-												<option value="5" <c:if test="${pageSize==5 }">selected</c:if>>5</option>
+													<option value="3" <c:if test="${pageBean.pageSize==3 }">selected</c:if>>3</option>
+													<option value="5" <c:if test="${pageBean.pageSize==5 }">selected</c:if>>5</option>
 												</select>
 												条
-												[<A href="javascript:to_page(${page-1})">前一页</A>]
+												[<A href="javascript:to_page(${pageBean.page-1})">前一页</A>]
 												<B>${page}</B>
-												[<A href="javascript:to_page(${page+1})">后一页</A>] 
+												[<A href="javascript:to_page(${pageBean.page+1})">后一页</A>] 
 												到
 												<input type="text" size="3" id="page" name="page" value="${pageBean.page}" />
 												页
