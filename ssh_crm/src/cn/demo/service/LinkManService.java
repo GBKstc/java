@@ -1,20 +1,14 @@
 package cn.demo.service;
 
-import java.util.List;
-
 import org.hibernate.criterion.DetachedCriteria;
 
-import cn.demo.domain.Customer;
+import cn.demo.domain.Linkman;
 import cn.demo.utils.PageBean;
 
-public interface CustomerService {
+public interface LinkManService {
 
 	PageBean getPageBean(DetachedCriteria dc, Integer pageSize, Integer page);
 
-
-	void saveCustomer(Customer customer);
-
-
-	void deleteCustomer(Customer customer);
+	void saveLinkMan(Linkman linkman);
 
 }

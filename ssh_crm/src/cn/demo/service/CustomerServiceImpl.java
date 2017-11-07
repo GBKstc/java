@@ -24,6 +24,10 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public PageBean getPageBean(DetachedCriteria dc, Integer pageSize, Integer page) {
 		Integer total = cd.getTotalCount(dc);
+		//默认显示20
+		if(pageSize==null||pageSize==0) {
+			pageSize=20;
+		}
 		PageBean pg = new PageBean(total, pageSize, page);
 		Integer start = pg.getStart();
 		System.out.println("start="+start);
@@ -42,6 +46,12 @@ public class CustomerServiceImpl implements CustomerService{
 		System.out.println(customer);
 		System.out.println(customer.getCust_level());
 		cd.save(customer);
+	}
+
+	@Override
+	public void deleteCustomer(Customer customer) {
+		System.out.println("deleteCustomer");
+		cd.delete(customer);
 	}
 	
 

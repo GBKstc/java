@@ -99,9 +99,9 @@
 													<TD>${customer.cust_phone }</TD>
 													<TD>${customer.cust_mobile }</TD>
 													<TD>
-													<a href="${pageContext.request.contextPath }/customerServlet?method=edit&custId=${customer.cust_id}">修改</a>
+													<a href="${pageContext.request.contextPath }/jsp/customer/edit.jsp?method=edit&custId=${customer.cust_id}">修改</a>
 													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/customerServlet?method=delete&custId=${customer.cust_id}">删除</a>
+													<a href="${pageContext.request.contextPath }/CustomerAction_delete?cust_id=${customer.cust_id}">删除</a>
 													</TD>
 												</TR>
 												
@@ -120,8 +120,8 @@
 												,每页显示
 												<select name="pageSize">
 												
-													<option value="3" <c:if test="${pageBean.pageSize==3 }">selected</c:if>>3</option>
-													<option value="5" <c:if test="${pageBean.pageSize==5 }">selected</c:if>>5</option>
+													<option value="20" <c:if test="${pageBean.pageSize==20 }">selected</c:if>>20</option>
+													<option value="30" <c:if test="${pageBean.pageSize==30 }">selected</c:if>>30</option>
 												</select>
 												条
 												[<A href="javascript:to_page(${pageBean.page-1})">前一页</A>]
@@ -155,6 +155,7 @@
 				</TR>
 			</TBODY>
 		</TABLE>
+		<s:debug></s:debug>
 	</FORM>
 </BODY>
 </HTML>

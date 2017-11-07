@@ -15,10 +15,8 @@
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/AddLinkManServlet"
+		action="${pageContext.request.contextPath }/LinkManAction_add"
 		method=post>
-		
-
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
 				<TR>
@@ -48,7 +46,7 @@
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
 							<tr>
 								<td>所属客户：</td>
-								<td colspan="3"><input type="text" name="cust_id" style="WIDTH: 180px"/></td>
+								<td colspan="3"><input type="text" name="customer.cust_id" style="WIDTH: 180px"/></td>
 							</tr>
 							<TR>
 								<td>联系人名称：</td>

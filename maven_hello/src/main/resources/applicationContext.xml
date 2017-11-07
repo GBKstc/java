@@ -58,56 +58,22 @@
 			</props>
 		</property>
 		<!-- 引入orm元数据,指定orm元数据所在的包路径,spring会自动读取包中的所有配置 -->
-		<property name="mappingDirectoryLocations" value="classpath:cn/demo/domain" ></property>
+		<property name="mappingDirectoryLocations" value="classpath:cn/demo/entity" ></property>
 	</bean> 	
 	
-	<bean name="userAction" class="cn.demo.web.action.UserAction" scope="prototype">
-		<property name="userService" ref="userService" ></property>
-	</bean>
-	
-	<bean name="customerAction" class="cn.demo.web.action.CustomerAction" scope="prototype">
+	<bean name="customerAction" class="cn.demo.action.CustomerAction" scope="prototype">
 		<property name="customerService" ref="customerService" ></property>
 	</bean>
 	
-	<bean name="linkManAction" class="cn.demo.web.action.LinkManAction" scope="prototype">
-		<property name="linkManService" ref="linkManService" ></property>
-	</bean>
-	
-	<bean name="baseDictAction" class="cn.demo.web.action.BaseDictAction" scope="prototype">
-		<property name="baseDictService" ref="baseDictService" ></property>
-	</bean>
-	
 	<!-- Ser配置 -->
-	<bean name="userService" class="cn.demo.service.UserServiceImpl">
-		<property name="ud" ref="userDao"></property>
-	</bean>
-	
-	<bean name="customerService" class="cn.demo.service.CustomerServiceImpl">
+	<bean name="customerService" class="cn.demo.service.Impl.CustomerServiceImpl">
 		<property name="cd" ref="customerDao"></property>
 	</bean>
 	
-	<bean name="linkManService" class="cn.demo.service.LinkManServiceImpl">
-		<property name="ld" ref="linkManDao"></property>
-	</bean>
-	
-	<bean name="baseDictService" class="cn.demo.service.BaseDictServiceImpl">
-		<property name="bd" ref="baseDictDao"></property>
-	</bean>
 	
 	<!-- Dao配置 -->
-	<bean name="userDao" class="cn.demo.dao.UserDaoImpl">
+	<bean name="customerDao" class="cn.demo.dao.Impl.CustomerDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
-	<bean name="customerDao" class="cn.demo.dao.CustomerDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean name="linkManDao" class="cn.demo.dao.LinkManDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean name="baseDictDao" class="cn.demo.dao.BaseDictDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
 </beans>

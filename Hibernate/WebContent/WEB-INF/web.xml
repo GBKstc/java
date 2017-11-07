@@ -2,11 +2,11 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>hibernate_crm</display-name>
   <listener>
-  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <context-param>
-  	<param-name>contextConfigLocation</param-name>
-  	<param-value>classpath:applicationContext.xml</param-value>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -63,5 +63,15 @@
   <servlet-mapping>
     <servlet-name>ListLinkmanServlet</servlet-name>
     <url-pattern>/listLinkmanServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Maven</display-name>
+    <servlet-name>Maven</servlet-name>
+    <servlet-class>cn.demo.Maven</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Maven</servlet-name>
+    <url-pattern>/Maven</url-pattern>
   </servlet-mapping>
 </web-app>

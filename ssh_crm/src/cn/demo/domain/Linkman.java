@@ -2,6 +2,11 @@ package cn.demo.domain;
 
 public class Linkman {
 	
+	@Override
+	public String toString() {
+		return "Linkman [lkm_name=" + lkm_name + ", lkm_cust_id=" + lkm_cust_id + ", lkm_gender=" + lkm_gender
+				+ ", lkm_phone=" + lkm_phone + ", lkm_mobile=" + lkm_mobile + ", customer=" + customer + "]";
+	}
 	private Long lkm_id;
 	private String lkm_name;
 	private Long lkm_cust_id;

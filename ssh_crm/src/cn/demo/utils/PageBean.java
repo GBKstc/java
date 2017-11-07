@@ -15,7 +15,7 @@ public class PageBean {
 		}
 		
 		if(this.pageSize==null) {
-			this.pageSize = 3;
+			this.pageSize = 20;
 		}
 		this.totalPage = (this.total-1)/this.pageSize+1;
 		if(this.page<1) {

@@ -41,9 +41,14 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	}
 	
 	public String add() throws Exception {
-		System.out.println("add");
 		customerService.saveCustomer(customer);
 		return "add";
+	}
+	
+	public String delete() throws Exception {
+		customerService.deleteCustomer(customer);
+		System.out.println(customer);
+		return "delete";
 	}
 	
 	@Override
