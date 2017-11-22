@@ -20,6 +20,7 @@
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		 <tx:attributes>
 			<tx:method name="save*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="add*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
 			<tx:method name="persist*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
 			<tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
 			<tx:method name="modify*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
@@ -32,7 +33,7 @@
  	
  	<!-- 配置织入 -->
  	<aop:config>
- 		<aop:pointcut expression="execution(* cn.demo.service.*ServiceImpl.*(..))" id="txPc"/>
+ 		<aop:pointcut expression="execution(* cn.demo.service.Impl.*ServiceImpl.*(..))" id="txPc"/>
  		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPc"/>
  	</aop:config>
  	
@@ -65,14 +66,38 @@
 		<property name="customerService" ref="customerService" ></property>
 	</bean>
 	
+	<bean name="userAction" class="cn.demo.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService" ></property>
+	</bean>
+	
+	<bean name="staffAction" class="cn.demo.action.StaffAction" scope="prototype">
+		<property name="staffService" ref="staffService" ></property>
+	</bean>
+	
 	<!-- Ser配置 -->
 	<bean name="customerService" class="cn.demo.service.Impl.CustomerServiceImpl">
 		<property name="cd" ref="customerDao"></property>
 	</bean>
 	
+	<bean name="userService" class="cn.demo.service.Impl.UserServiceImpl">
+		<property name="ud" ref="userDao"></property>
+	</bean>
+	
+	<bean name="staffService" class="cn.demo.service.Impl.StaffServiceImpl">
+		<property name="sd" ref="staffDao"></property>
+	</bean>
+	
 	
 	<!-- Dao配置 -->
 	<bean name="customerDao" class="cn.demo.dao.Impl.CustomerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean name="userDao" class="cn.demo.dao.Impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean name="staffDao" class="cn.demo.dao.Impl.StaffDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	

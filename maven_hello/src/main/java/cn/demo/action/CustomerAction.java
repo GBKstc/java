@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -27,8 +28,10 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 //		System.out.println(customer);
 		customer = customerService.findCustomerById(customer.getCustId());
 		System.out.println(customer);
+		Gson gson = new Gson();
+		String json = gson.toJson(customer);
 		HttpServletResponse response = ServletActionContext.getResponse();
-		response.getWriter().write("Cust_id:"+customer.getCustName());
+		response.getWriter().write(json);
 		return null; 
 	}
 

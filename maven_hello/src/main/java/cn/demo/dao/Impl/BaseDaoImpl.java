@@ -5,10 +5,16 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
+import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
+import cn.demo.bean.User;
 import cn.demo.dao.BaseDao;
 
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
@@ -47,6 +53,24 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 		
 		return (T) getHibernateTemplate().get(clazz, id);
 	}
+	
+	@Override
+	public T getByCode(final String code) {
+		
+		return (T) getHibernateTemplate().execute(new HibernateCallback<T>() {
+
+		
+
+			@Override
+			public T doInHibernate(Session session) throws HibernateException {
+				String sql = "SELECT * FROM `user` WHERE `code`=?";
+				SQLQuery sqlQuery = session.createSQLQuery(sql);
+				sqlQuery.addEntity(clazz);
+				sqlQuery.setParameter(0, code);
+				return (T) sqlQuery.uniqueResult();
+			}
+		});
+	}
 
 	@Override
 	public Integer getTotalCount(DetachedCriteria dc) {
@@ -64,6 +88,12 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 	@Override
 	public List<T> getPageList(DetachedCriteria dc, Integer start, Integer size) {
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(dc,start,size);
+		return list;
+	}
+
+	@Override
+	public List<T> getList(DetachedCriteria dc) {
+		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(dc);
 		return list;
 	}
 

@@ -20,6 +20,9 @@ public interface BaseDao<T> {
 	Integer getTotalCount(DetachedCriteria dc);
 	
 	List<T> getPageList(DetachedCriteria dc,Integer start,Integer size);
+	List<T> getList(DetachedCriteria dc);
+
+	T getByCode(String code);
 	
 	
 }

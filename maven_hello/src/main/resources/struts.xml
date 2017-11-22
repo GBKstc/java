@@ -6,13 +6,31 @@
 <struts>
 	<constant name="struts.objectFactory" value="spring"></constant>
 	<package name="crm" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="cors" class="cn.demo.action.filter.CrossDomain">
+				
+			</interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="cors"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack"/>
+		<!-- 全局跳转-->
+		<global-results>
+			<result name="error" >/error.jsp</result>
+		</global-results>
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.RuntimeException"></exception-mapping>
 		</global-exception-mappings>
+		 
+
 		<action name="Customer_*" class="customerAction" method="{1}">
 			<result name="success" type="redirect">/info.html</result>
-			<result name="error" >/error.jsp</result>
+			
 		</action>
+		<action name="user*" class="userAction" method="{1}"></action>
+		<action name="staff_*" class="staffAction" method="{1}"></action>
 	</package>
 </struts>		
 	

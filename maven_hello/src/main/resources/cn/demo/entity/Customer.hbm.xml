@@ -2,8 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-2-26 16:58:40 by Hibernate Tools 4.3.1.Final -->
-<hibernate-mapping>
-    <class name="cn.demo.bean.Customer" table="cst_customer"  optimistic-lock="version">
+<hibernate-mapping package="cn.demo.bean">
+    <class name="Customer" table="cst_customer"  optimistic-lock="version">
         <id name="custId" type="java.lang.Long">
             <column name="cust_id" />
             <generator class="identity" />
