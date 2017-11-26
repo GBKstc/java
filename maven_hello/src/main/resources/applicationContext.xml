@@ -74,6 +74,10 @@
 		<property name="staffService" ref="staffService" ></property>
 	</bean>
 	
+	<bean name="regionAction" class="cn.demo.action.RegionAction" scope="prototype">
+		<property name="regionService" ref="regionService" ></property>
+	</bean>
+	
 	<!-- Ser配置 -->
 	<bean name="customerService" class="cn.demo.service.Impl.CustomerServiceImpl">
 		<property name="cd" ref="customerDao"></property>
@@ -85,6 +89,10 @@
 	
 	<bean name="staffService" class="cn.demo.service.Impl.StaffServiceImpl">
 		<property name="sd" ref="staffDao"></property>
+	</bean>
+	
+	<bean name="regionService" class="cn.demo.service.Impl.RegionServiceImpl">
+		<property name="rd" ref="regionDao"></property>
 	</bean>
 	
 	
@@ -101,4 +109,7 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
+	<bean name="regionDao" class="cn.demo.dao.Impl.RegionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>

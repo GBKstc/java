@@ -32,4 +32,7 @@
             <one-to-many class="cn.demo.bean.Decidedzone" />
         </set>
     </class>
+    <query name="staff.del">
+    	UPDATE Staff SET deltag = '1' WHERE id = ?
+    </query>
 </hibernate-mapping>

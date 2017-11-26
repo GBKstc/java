@@ -97,4 +97,19 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 		return list;
 	}
 
+	@Override
+	public void excuteUpdate(String queryName, Object... objects) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		Query query = session.getNamedQuery(queryName);
+		for (int i = 0; i < objects.length; i++) {
+			query.setParameter(i, objects[i]);
+		}
+		query.executeUpdate();
+	}
+
+	@Override
+	public void saveOrUpdate(T t) {
+		getHibernateTemplate().saveOrUpdate(t);
+	}
+
 }

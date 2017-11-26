@@ -10,6 +10,12 @@ public interface StaffService {
 
 	void addStaff(Staff staff);
 
+	void deleteStaff(Staff staff);
+
+	void updateStaff(Staff staff);
+
+	Object getStaffList(Integer page, Integer pageSize);
+
 
 
 }

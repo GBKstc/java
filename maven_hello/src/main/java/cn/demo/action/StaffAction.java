@@ -4,17 +4,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
-
 import cn.demo.bean.Staff;
 import cn.demo.service.StaffService;
 import cn.demo.utils.SetResult;
 
-public class StaffAction extends ActionSupport implements ModelDriven<Staff>{
+public class StaffAction extends BaseAction<Staff>{
 	private static final long serialVersionUID = 1L;
-	
-	private Staff staff = new Staff();
 
 	private StaffService staffService;
 	public void setStaffService(StaffService staffService) {
@@ -24,7 +19,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff>{
 
 	//获取staffList
 	public String getStaffList() throws Exception {
-		String json = SetResult.setResult("success", staffService.getStaffList());
+		String json = SetResult.setResult("success", staffService.getStaffList(page,pageSize));
 		HttpServletResponse response = ServletActionContext.getResponse();
 		ServletActionContext.getResponse().getWriter().write(json);
 		return null;
@@ -32,18 +27,36 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff>{
 
 	//添加staff
 	public String addStaff() throws Exception {
-		staffService.addStaff(staff);
+		String deltag = model.getDeltag();
+		if(deltag ==null || deltag.isEmpty()) {
+			model.setDeltag("0");
+		}
+		staffService.addStaff(model);
 		String json = SetResult.setDefaultResult();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		ServletActionContext.getResponse().getWriter().write(json);
 		return null;
 	}
+	
+	//删除staff
+	public String delStaff() throws Exception {
+		staffService.deleteStaff(model);
+		String json = SetResult.setDefaultResult();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		ServletActionContext.getResponse().getWriter().write(json);
+		return null;
+	}	
+	
+	//删除staff
+	public String updateStaff() throws Exception {
+		staffService.updateStaff(model);
+		String json = SetResult.setDefaultResult();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		ServletActionContext.getResponse().getWriter().write(json);
+		return null;
+	}	
 
-	@Override
-	public Staff getModel() {
-		// TODO Auto-generated method stub
-		return staff;
-	}
+
 
 	
 }

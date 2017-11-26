@@ -9,6 +9,8 @@ public interface BaseDao<T> {
 	
 	void save(T t);
 	
+	void saveOrUpdate(T t);
+	
 	void delete(T t);
 	
 	void delete(Serializable id);
@@ -23,6 +25,8 @@ public interface BaseDao<T> {
 	List<T> getList(DetachedCriteria dc);
 
 	T getByCode(String code);
+	
+	void excuteUpdate(String queryName,Object...objects);
 	
 	
 }
