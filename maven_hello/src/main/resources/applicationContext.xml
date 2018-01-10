@@ -63,7 +63,7 @@
 	</bean> 	
 	
 	<bean name="customerAction" class="cn.demo.action.CustomerAction" scope="prototype">
-		<property name="customerService" ref="customerService" ></property>
+		<property name="cxfUtils" ref="cxfUtils" ></property>
 	</bean>
 	
 	<bean name="userAction" class="cn.demo.action.UserAction" scope="prototype">
@@ -76,6 +76,14 @@
 	
 	<bean name="regionAction" class="cn.demo.action.RegionAction" scope="prototype">
 		<property name="regionService" ref="regionService" ></property>
+	</bean>
+	
+	<bean name="subareaAction" class="cn.demo.action.SubareaAction" scope="prototype">
+		<property name="subareaService" ref="subareaService" ></property>
+	</bean>
+	
+	<bean name="decidedzoneAction" class="cn.demo.action.DecidedzoneAction" scope="prototype">
+		<property name="decidedzoneService" ref="decidedzoneService" ></property >
 	</bean>
 	
 	<!-- Ser配置 -->
@@ -95,6 +103,14 @@
 		<property name="rd" ref="regionDao"></property>
 	</bean>
 	
+	<bean name="subareaService" class="cn.demo.service.Impl.SubareaServiceImpl">
+		<property name="sud" ref="subareaDao"></property>
+	</bean>
+	
+	<bean name="decidedzoneService" class="cn.demo.service.Impl.DecidedzoneServiceImpl">
+		<property name="sud" ref="subareaDao"></property>
+		<property name="dd" ref="decidedzoneDao"></property>
+	</bean>
 	
 	<!-- Dao配置 -->
 	<bean name="customerDao" class="cn.demo.dao.Impl.CustomerDaoImpl">
@@ -111,5 +127,18 @@
 	
 	<bean name="regionDao" class="cn.demo.dao.Impl.RegionDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean name="subareaDao" class="cn.demo.dao.Impl.SubareaDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean name="decidedzoneDao" class="cn.demo.dao.Impl.DecidedzoneDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- CXFUtils -->
+	<bean name="cxfUtils" class="cn.demo.utils.CXFUtils">
+		
 	</bean>
 </beans>

@@ -22,7 +22,6 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	
 	@Override
 	public T getModel() {
-		// TODO Auto-generated method stub
 		return model;
 	}
 	public BaseAction() {

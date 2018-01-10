@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 public class  SetResult {
+	private static Gson gson = new Gson();
 	
 	public static <T> String setResult(String msg,T data) {
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -15,7 +17,7 @@ public class  SetResult {
 			msg = "成功";
 		map.put("msg", msg);
 		map.put("data", data);
-		return new Gson().toJson(map);
+		return gson.toJson(map);
 	}
 
 	//默认返回结果
@@ -29,6 +31,6 @@ public class  SetResult {
 		map.put("error", "1");
 		map.put("msg", error);
 		map.put("data", "");
-		return new Gson().toJson(map);
+		return gson.toJson(map);
 	}	
 }

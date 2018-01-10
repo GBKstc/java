@@ -18,7 +18,7 @@ public class Staff implements java.io.Serializable {
 	private String deltag;  //作废标志
 	private String station; //所属单位
 	private String standard;//取派标准 
-	private Set decidedzones = new HashSet(0); //定区
+//	private Set decidedzones = new HashSet(0); //定区
 
 	// Constructors
 
@@ -33,7 +33,7 @@ public class Staff implements java.io.Serializable {
 
 	/** full constructor */
 	public Staff(String id, String name, String telephone, String haspda,
-			String deltag, String station, String standard, Set decidedzones) {
+			String deltag, String station, String standard) {
 		this.id = id;
 		this.name = name;
 		this.telephone = telephone;
@@ -41,7 +41,7 @@ public class Staff implements java.io.Serializable {
 		this.deltag = deltag;
 		this.station = station;
 		this.standard = standard;
-		this.decidedzones = decidedzones;
+//		this.decidedzones = decidedzones;
 	}
 
 	// Property accessors
@@ -102,12 +102,12 @@ public class Staff implements java.io.Serializable {
 		this.standard = standard;
 	}
 
-	public Set getDecidedzones() {
-		return this.decidedzones;
-	}
-
-	public void setDecidedzones(Set decidedzones) {
-		this.decidedzones = decidedzones;
-	}
+//	public Set getDecidedzones() {
+//		return this.decidedzones;
+//	}
+//
+//	public void setDecidedzones(Set decidedzones) {
+//		this.decidedzones = decidedzones;
+//	}
 
 }

@@ -87,6 +87,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 
 	@Override
 	public List<T> getPageList(DetachedCriteria dc, Integer start, Integer size) {
+		dc.setResultTransformer(DetachedCriteria.ROOT_ENTITY);//指定封装方式
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(dc,start,size);
 		return list;
 	}

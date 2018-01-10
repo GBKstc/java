@@ -3,6 +3,8 @@ package cn.demo.bean;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 区域
  */
@@ -10,7 +12,6 @@ import java.util.Set;
 public class Region implements java.io.Serializable {
 
 	// Fields
-
 	private String id;
 	private String province;
 	private String city;

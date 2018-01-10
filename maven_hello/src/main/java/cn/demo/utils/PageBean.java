@@ -2,6 +2,8 @@ package cn.demo.utils;
 
 import java.util.List;
 
+import com.google.gson.annotations.Expose;
+
 public class PageBean {
 	
 	
@@ -27,12 +29,16 @@ public class PageBean {
 		
 	}
 	//总记录
+	@Expose
 	private Integer total;
 	//总页数
+	@Expose
 	private Integer totalPage;
 	//每页显示
+	@Expose
 	private Integer pageSize;
 	//当前页
+	@Expose
 	private Integer page;
 //	//分页数据
 //	private List list;

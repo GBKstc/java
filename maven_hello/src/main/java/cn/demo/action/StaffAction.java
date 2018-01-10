@@ -21,7 +21,7 @@ public class StaffAction extends BaseAction<Staff>{
 	public String getStaffList() throws Exception {
 		String json = SetResult.setResult("success", staffService.getStaffList(page,pageSize));
 		HttpServletResponse response = ServletActionContext.getResponse();
-		ServletActionContext.getResponse().getWriter().write(json);
+		response.getWriter().write(json);
 		return null;
 	}
 
@@ -34,7 +34,7 @@ public class StaffAction extends BaseAction<Staff>{
 		staffService.addStaff(model);
 		String json = SetResult.setDefaultResult();
 		HttpServletResponse response = ServletActionContext.getResponse();
-		ServletActionContext.getResponse().getWriter().write(json);
+		response.getWriter().write(json);
 		return null;
 	}
 	
@@ -43,7 +43,7 @@ public class StaffAction extends BaseAction<Staff>{
 		staffService.deleteStaff(model);
 		String json = SetResult.setDefaultResult();
 		HttpServletResponse response = ServletActionContext.getResponse();
-		ServletActionContext.getResponse().getWriter().write(json);
+		response.getWriter().write(json);
 		return null;
 	}	
 	
@@ -52,7 +52,7 @@ public class StaffAction extends BaseAction<Staff>{
 		staffService.updateStaff(model);
 		String json = SetResult.setDefaultResult();
 		HttpServletResponse response = ServletActionContext.getResponse();
-		ServletActionContext.getResponse().getWriter().write(json);
+		response.getWriter().write(json);
 		return null;
 	}	
 

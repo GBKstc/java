@@ -1,44 +1,64 @@
 package cn.demo.action;
 
 import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
+import com.google.gson.reflect.TypeToken;
 
-import cn.demo.bean.Customer;
-import cn.demo.service.CustomerService;
+import cn.demo.gbk.service.Customer;
+import cn.demo.gbk.service.CustomerService;
+import cn.demo.utils.CXFUtils;
+import cn.demo.utils.GsonUtils;
+import cn.demo.utils.SetResult;
 
-public class CustomerAction extends ActionSupport implements ModelDriven<Customer>{
+public class CustomerAction extends BaseAction<Customer>{
+
 	private static final long serialVersionUID = 1L;
-	private Customer customer = new Customer();
-	private CustomerService customerService;
-
-
-	public void setCustomerService(CustomerService customerService) {
-		this.customerService = customerService;
+	private CXFUtils cxfUtils;
+	
+	private String decideId;
+	public void setDecideId(String decideId) {
+		this.decideId = decideId;
+	}
+	private String list;
+	public void setList(String list) {
+		this.list = list;
 	}
 
+	public void setCxfUtils(CXFUtils cxfUtils) {
+		this.cxfUtils = cxfUtils;
+	}
 
-	public String findCustById() throws IOException {
-//		System.out.println(customer);
-		customer = customerService.findCustomerById(customer.getCustId());
-		System.out.println(customer);
+	public void findNotBindingList() throws Exception{
+		CustomerService service = cxfUtils.getService();
+		List<Customer> list = service.findNotBindingList();
+		String json = SetResult.setResult("success", list);
+		ServletActionContext.getResponse().getWriter().write(json);
+		
+	}
+	
+	public void findHasBindingList() throws Exception{
+		System.out.println(decideId);
+		
+		CustomerService service = cxfUtils.getService();
+		List<Customer> list = service.findHasBindingList(decideId);
+		String json = SetResult.setResult("success", list);
+		ServletActionContext.getResponse().getWriter().write(json);
+		
+	}
+	
+	public void saveCustToDecide() throws Exception {
+		
 		Gson gson = new Gson();
-		String json = gson.toJson(customer);
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.getWriter().write(json);
-		return null; 
+		List<Customer> CustList = gson.fromJson(list, new TypeToken<List<Customer>>(){}.getType());
+
+		CustomerService service = cxfUtils.getService();
+		service.saveCustomer(CustList,decideId);
+		String json = SetResult.setDefaultResult();
+		ServletActionContext.getResponse().getWriter().write(json);
 	}
 
-
-	@Override
-	public Customer getModel() {
-		// TODO Auto-generated method stub
-		return customer;
-	}
 }

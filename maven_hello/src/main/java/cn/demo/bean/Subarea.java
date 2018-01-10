@@ -108,4 +108,7 @@ public class Subarea implements java.io.Serializable {
 		this.position = position;
 	}
 
+	public String getName() {
+		return this.region.getProvince()+this.region.getCity()+this.region.getDistrict();
+	}
 }

@@ -32,6 +32,8 @@
 		<action name="user*" class="userAction" method="{1}"></action>
 		<action name="staff_*" class="staffAction" method="{1}"></action>
 		<action name="region_*" class="regionAction" method="{1}"></action>
+		<action name="subarea_*" class="subareaAction" method="{1}"></action>
+		<action name="decidedzone_*" class="decidedzoneAction" method="{1}"></action>
 	</package>
 </struts>		
 	
