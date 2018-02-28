@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.demo</groupId>
+    <artifactId>gbk-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>cn.demo</groupId>
+  <artifactId>gbk-manager</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <dependencies>
+		<dependency>
+			<groupId>cn.demo</groupId>
+			<artifactId>gbk-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+  <modules>
+  	<module>gbk-manager-dao</module>
+  	<module>gbk-manager-interface</module>
+  	<module>gbk-manager-service</module>
+  	<module>gbk-manager-web</module>
+  	<module>gbk-manager-pojo</module>
+  </modules>
+  <!-- tomcat插件 -->
+  <build>
+  	<plugins> 
+  		<plugin>
+  			<groupId>org.apache.tomcat.maven</groupId>
+			<artifactId>tomcat7-maven-plugin</artifactId>
+			<configuration>
+				<path>/</path>
+				<port>13000</port>
+			</configuration>
+  		</plugin>
+  	</plugins>
+  </build>
+</project>
